@@ -56,7 +56,7 @@ def prediction(filename):
     # converting probabilities to percentages
     percentages = [round(p*100,2) for p in probabilities]
     #Step 4
-    number_to_class = ['Singapore Red Prawn (D13)','Sultan (D24)','Mao Shan Wang (D197)']
+    number_to_class = ['Singapore Red Prawn (D13)','Sultan (D24)','Mao Shan Wang (D197)','none']
     index = np.argsort(percentages)
     if number_to_class[index[2]] == "Mao Shan Wang (D197)":
         description = "Mao Shan Wang AKA: Butter durian, Cat Mountain King, Rajah Kunyit. Probably the most popular type of durian among Singaporeans besides the D24. Rich in taste and color, Mao Shan Wang durians boast a creamy texture and leave a strong bittersweet taste in your mouth. To distinguish them, look out for the pyramid-shapes thorns at the base of the stem. They also have a unique starfish-shaped pattern found at the base of the durian fruit. <br><br><strong>Flavour profile:</strong> Bittersweet and rich with a custardy texture that often lands itself in delicacies like ice cream, pastries, and even coffee<br><br><strong>Good for:</strong> Royalty and/or anyone who treats their tastebuds like one — after all, Mao Shan Wang literally translates to Cat Mountain King"
@@ -65,7 +65,7 @@ def prediction(filename):
     elif number_to_class[index[2]] == "Singapore Red Prawn (D13)":
         description = "Originating from Johor, D13 durians are also known as the 'kampung' breed with a sticky texture. It is perhaps one of the many highly-sought-after durian species with a bright orange flesh and large seeds which makes it easier to enjoy.<br><br><strong>Flavour profile:</strong> Sweet and fragrant with bright orange sticky flesh<br><br><strong>Great for:</strong> Beginners who wish to enjoy the durian without the usual strong pungent flavours"
     else:
-        description = "To be added"
+        description = ""
     predictions = {
         "class1":number_to_class[index[2]],
         "class2":number_to_class[index[1]],
@@ -77,44 +77,6 @@ def prediction(filename):
     }
     #Step 5
     return render_template('predict.html', predictions=predictions)
-
-# @app.route('/prediction/' + filename, methods=['GET', 'POST'])
-# def prediction_page():
-#     if request.method == 'POST':
-#         file = request.files['file']
-#         filename = secure_filename(file.filename)
-#         file.save(os.path.join('uploads', filename))
-#         return redirect(url_for('prediction', filename=filename))
-#     return render_template('index.html')
-
-# @app.route('/prediction/<filename>') 
-# def prediction(filename):
-#     #Step 1
-#     my_image = plt.imread(os.path.join('uploads', filename))
-#     #Step 2
-# #     my_image_re = resize(my_image, (32,32,3))
-#     my_image_re = tf.keras.applications.vgg16.preprocess_input(my_image)
-    
-#     #Step 3
-#     #with graph.as_default():
-#       #set_session(sess)
-#       #Add
-#     model.run_eagerly=True  
-#     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
-#     print(probabilities)
-#     #Step 4
-#     number_to_class = ['D13', 'D24', 'D197']
-#     index = np.argsort(probabilities)
-#     predictions = {
-#       "class1":number_to_class[index[9]],
-#       "class2":number_to_class[index[8]],
-#       "class3":number_to_class[index[7]],
-#       "prob1":probabilities[index[9]],
-#       "prob2":probabilities[index[8]],
-#       "prob3":probabilities[index[7]],
-#      }
-#     #Step 5
-#     return render_template('/predict.html', predictions=predictions)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
