@@ -17,7 +17,7 @@ print("Loading model")
 #sess = tf.compat.v1.Session()
 #set_session(sess)
 global model 
-model = load_model('durian_classification_trained_model.h5') 
+model = load_model('durian_classification_trained_model_negative_examples.h5') 
 #global graph
 #graph = tf.compat.v1.get_default_graph()
 # filename = ""
