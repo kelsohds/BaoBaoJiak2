@@ -78,7 +78,7 @@ def prediction(filename):
         return render_template('predict.html', predictions=predictions)
     else:
         description = ""
-        return render_template('predict2.html', predictions=predictions)
+        return render_template('predict_not_durian.html', predictions=predictions)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
