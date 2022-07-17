@@ -58,7 +58,10 @@ def prediction(filename):
     #Step 4
     number_to_class = ['Singapore Red Prawn (D13)','Sultan (D24)','Mao Shan Wang (D197)','none']
     index = np.argsort(percentages)
-    predictions = {
+    
+    if number_to_class[index[2]] == "Mao Shan Wang (D197)":
+        description = "Mao Shan Wang AKA: Butter durian, Cat Mountain King, Rajah Kunyit. Probably the most popular type of durian among Singaporeans besides the D24. Rich in taste and color, Mao Shan Wang durians boast a creamy texture and leave a strong bittersweet taste in your mouth. To distinguish them, look out for the pyramid-shapes thorns at the base of the stem. They also have a unique starfish-shaped pattern found at the base of the durian fruit. <br><br><strong>Flavour profile:</strong> Bittersweet and rich with a custardy texture that often lands itself in delicacies like ice cream, pastries, and even coffee<br><br><strong>Good for:</strong> Royalty and/or anyone who treats their tastebuds like one — after all, Mao Shan Wang literally translates to Cat Mountain King"
+        predictions = {
         "class1":number_to_class[index[2]],
         "class2":number_to_class[index[1]],
         "class3":number_to_class[index[0]],
@@ -66,18 +69,43 @@ def prediction(filename):
         "prob2":percentages[index[1]],
         "prob3":percentages[index[0]],
         "description":description
-    }
-    if number_to_class[index[2]] == "Mao Shan Wang (D197)":
-        description = "Mao Shan Wang AKA: Butter durian, Cat Mountain King, Rajah Kunyit. Probably the most popular type of durian among Singaporeans besides the D24. Rich in taste and color, Mao Shan Wang durians boast a creamy texture and leave a strong bittersweet taste in your mouth. To distinguish them, look out for the pyramid-shapes thorns at the base of the stem. They also have a unique starfish-shaped pattern found at the base of the durian fruit. <br><br><strong>Flavour profile:</strong> Bittersweet and rich with a custardy texture that often lands itself in delicacies like ice cream, pastries, and even coffee<br><br><strong>Good for:</strong> Royalty and/or anyone who treats their tastebuds like one — after all, Mao Shan Wang literally translates to Cat Mountain King"
+        }
         return render_template('predict.html', predictions=predictions)
     elif number_to_class[index[2]] == "Sultan (D24)":
         description = "Before the Mao Shan Wang breed surged in popularity, the most famous breed back in the ’90s was the D24 durians. D24 durians are a little less overwhelming in flavour and are known for their creamy texture and subtle bittersweet after-taste. If you’re not that familiar with durians, this is a good introduction to the king of fruits. The stem of the durian is shorter compared to other durians and it has a brown-coloured ring around the bottom of the stem.<br><br><strong>Flavour profile:</strong> Well-balanced flavours of sweet and bitter, D24 Sultan is smooth and creamy with hints of alcoholic notes<br><br><strong>Good for:</strong> Taking to parties because it’s hard to go wrong with this crowd favourite"
+        predictions = {
+        "class1":number_to_class[index[2]],
+        "class2":number_to_class[index[1]],
+        "class3":number_to_class[index[0]],
+        "prob1":percentages[index[2]],
+        "prob2":percentages[index[1]],
+        "prob3":percentages[index[0]],
+        "description":description
+        }
         return render_template('predict.html', predictions=predictions)
     elif number_to_class[index[2]] == "Singapore Red Prawn (D13)":
         description = "Originating from Johor, D13 durians are also known as the 'kampung' breed with a sticky texture. It is perhaps one of the many highly-sought-after durian species with a bright orange flesh and large seeds which makes it easier to enjoy.<br><br><strong>Flavour profile:</strong> Sweet and fragrant with bright orange sticky flesh<br><br><strong>Great for:</strong> Beginners who wish to enjoy the durian without the usual strong pungent flavours"
+        predictions = {
+        "class1":number_to_class[index[2]],
+        "class2":number_to_class[index[1]],
+        "class3":number_to_class[index[0]],
+        "prob1":percentages[index[2]],
+        "prob2":percentages[index[1]],
+        "prob3":percentages[index[0]],
+        "description":description
+        }
         return render_template('predict.html', predictions=predictions)
     else:
         description = ""
+        predictions = {
+        "class1":number_to_class[index[2]],
+        "class2":number_to_class[index[1]],
+        "class3":number_to_class[index[0]],
+        "prob1":percentages[index[2]],
+        "prob2":percentages[index[1]],
+        "prob3":percentages[index[0]],
+        "description":description
+        }
         return render_template('predict_not_durian.html', predictions=predictions)
 
 if __name__ == "__main__":
